@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Scripts -->
+        {{-- @vite(['resources\sass\app.scss', 'resources\js\app.js']) --}}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+        <!-- Global stylesheets -->
+        <link href="{{ url('bs5eticket/template/assets/fonts/inter/inter.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ url('bs5eticket/template/assets/icons/phosphor/styles.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ url('bs5eticket/template/html/layout_2/full/assets/css/ltr/all.min.css')}}" id="stylesheet" rel="stylesheet" type="text/css">
+        <!-- /global stylesheets -->
+    
+        <!-- Core JS files -->
+        <script src="{{ url('bs5eticket/template/assets/demo/demo_configurator.js')}}"></script>
+        <script src="{{ url('bs5eticket/template/assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
+        <!-- /core JS files -->
+    
+        <!-- Theme JS files -->
+        <script src="{{ url('bs5eticket/template/html/layout_2/full/assets/js/app.js')}}"></script>
+        <!-- /theme JS files -->
+
+        <style>
+            .bg-fabric{
+                background-image: url('{{ url("assetImg/fabric.webp")}}');
+                background-repeat: no-repeat;
+                background-size: cover;
+                  background-position: right;
+            }
+            .delete-trash{
+                opacity: 0;
+                transition: ease-in-out 0.2s;
+            }
+            .media-chat-message:hover .delete-trash{
+                opacity: 1;
+                transition: ease-in-out 0.2s;
+                z-index: 100;
+            }
+            .rotated { 
+                -webkit-transform: rotateZ(90deg);
+                -moz-transform: rotateZ(90deg);
+                -o-transform: rotateZ(90deg);
+                -ms-transform: rotateZ(90deg);
+                transform: rotateZ(90deg);
+                margin-bottom: 15px;
+                transition: 0.2s ease-in-out;
+            }
+            .norotated{
+                transition: 0.2s ease-in-out;
+            }
+            .hoverbtn:hover{
+                box-shadow: 3px 3px 3px rgba(75, 75, 75, 0.3);
+                transform: scale(1.05);
+                transition: 0.21s ease-in-out;
+            }
+            .bg-hover:hover{
+                background-color: rgba(223, 193, 58, 0.623);
+            }
+              .pall{
+                padding: 10px !important;
+              }
+            .bg-shadow-sm{
+                box-shadow: 4px 4px 4px -2px rgba(0,0,0,0.44);
+                -webkit-box-shadow: 4px 4px 4px -2px rgba(0,0,0,0.44);
+                -moz-box-shadow: 4px 4px 4px -2px rgba(0,0,0,0.44);
+              }
+        </style>
+        
+        <script type="text/javascript">
+            function alert(code,text) {
+                if (code==200) {
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'Good Job . . .',
+                      text: text,
+                      showConfirmButton: false,
+                      timer: 1500,
+                      width: '50rem'
+                    });
+                 }else if (code==402) {
+                    Swal.fire({
+                      icon: 'warning',
+                      title: 'Sorry . . .',
+                      text: text,
+                      showConfirmButton: false,
+                      timer: 2000,
+                      width: '50rem'
+                    });
+                 }else if (code==422){
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oopsss . . .',
+                      text: text,
+                      showConfirmButton: true,
+                      width: '50rem'
+                    });
+                 }else if (code==500){
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oopsss . . .',
+                      text: text,
+                      showConfirmButton: true,
+                      width: '50rem'
+                    });
+                 }else if (code==404){
+                    Swal.fire({
+                      buttonsStyling: false,
+                      customClass: {
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-light',
+                        denyButton: 'btn btn-light',
+                        input: 'form-control'
+                      },
+                      icon: 'error',
+                      title: 'Sorry',
+                      text: text,
+                      showConfirmButton: true,
+                      width: '50rem',
+                      confirmButtonText: '<i class="ph-check-circle"></i> OK',
+                    });
+                 }
+    
+            }
+    
+            function loading(){
+                $.blockUI({ 
+                    message: '<i class="ph-spinner spinner"></i><br><span>Processing...</span>',
+                    overlayCSS: {
+                        backgroundColor: '#1b2024',
+                        opacity: 0.8,
+                        cursor: 'wait'
+                    },
+                    css: {
+                        border: 0,
+                        color: '#fff',
+                        padding: 0,
+                        backgroundColor: 'transparent'
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+
+        <!-- Page content -->
+        <div class="page-content">
+    
+            <!-- Main sidebar -->
+            <div class="sidebar sidebar-dark sidebar-main sidebar-expand-lg">
+    
+                <!-- Sidebar header -->
+                <div class="sidebar-section bg-black bg-opacity-10 border-bottom border-bottom-white border-opacity-10">
+                    <div class="sidebar-logo d-flex justify-content-center align-items-center">
+                        <a href="{{ route('dashboard') }}" class="d-inline-flex align-items-center py-1">
+                            <img src="{{ url('assetImg/ticket7.png') }}" height="45" alt="">
+                            <img src="{{ url('assetImg/logo-apk2.png') }}" height="45" alt="" class="sidebar-resize-hide" style="margin-left: 0px !important">
+                            <!-- <img src="../../../assets/images/logo_text_light.svg" class="sidebar-resize-hide ms-3" height="14" alt=""> -->
+                        </a>
+    
+                        <div class="sidebar-resize-hide ms-auto">
+                            <button id="sidebarcontrol" type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
+                                <i class="ph-arrows-left-right"></i>
+                            </button>
+    
+                            <button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-lg-none">
+                                <i class="ph-x"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /sidebar header -->
+    
+    
+                <!-- Sidebar content -->
+                <div class="sidebar-content">
+    
+                    <!-- Customers -->
+                    <div class="p-2">
+                        <div class="rounded bg-fabric text-white text-center py-2">
+                            <span class="h4 text-nowrap"><b> SMANSIX </b></span>
+                        </div>
+                    </div>
+                    <!-- /customers -->
+    
+    
+                    <!-- Main navigation -->
+                    <div class="sidebar-section">
+                        <ul class="nav nav-sidebar" data-nav-type="accordion">
+                            @include('layouts.menu')
+                        </ul>
+                    </div>
+                    <!-- /main navigation -->
+    
+                </div>
+                {{-- <div class="alert bg-secondary bg-opacity-20 sidebar-resize-hide rounded p-2 m-3">
+                    <a target="_blank" href="{{ url('assetImg/User Manual Ticketing System.pdf') }}" class="d-flex justify-content-between mt-1 " data-color-theme="dark">
+                        <span>User Manual</span>
+                        <i class="ph-arrow-circle-right ms-2"></i>
+                    </a>
+                </div> --}}
+                {{-- <div class="text-center">
+                    <small>© 2023 Ticketing System</small>
+                </div> --}}
+                <!-- /sidebar content -->
+    
+            </div>
+            <!-- /main sidebar -->
+    
+    
+            <!-- Main content -->
+            <div class="content-wrapper">
+    
+                <!-- Main navbar -->
+                <div class="navbar navbar-expand-lg navbar-static shadow">
+                    <div class="container-fluid">
+                        <div class="d-flex d-lg-none me-2">
+                            <button type="button" class="navbar-toggler sidebar-mobile-main-toggle rounded-pill">
+                                <i class="ph-list"></i>
+                            </button>
+                        </div>
+    
+                        <ul class="nav flex-row">
+                            <li class="nav-item d-lg-none">
+                                <a href="#navbar_search" class="navbar-nav-link navbar-nav-link-icon rounded-pill" data-bs-toggle="collapse">
+                                    <i class="ph-magnifying-glass"></i>
+                                </a>
+                            </li>
+            
+                            <li class="nav-item nav-item-dropdown-lg dropdown ms-lg-2">
+                                <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill border shake" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                                    <i class="ph-bell"></i>
+                                    <span id="countchat" class="badge bg-yellow text-black position-absolute top-0 end-0 translate-middle-top zindex-1 rounded-pill mt-1 me-1">
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu wmin-lg-400 p-0">
+                                    <div class="d-flex align-items-center p-3">
+                                        <h6 class="mb-0">Notification</h6>
+                                    </div>
+                                    <div class="dropdown-menu-scrollable pb-2" style="--dropdown-scrollable-max-height: 34rem !important;" id="content_notif">
+                                    </div>
+                                </div>
+                            </li>
+                            {{-- <li class="nav-item nav-item-dropdown-lg dropdown ms-2">
+                                <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill border shake" data-bs-toggle="offcanvas" data-bs-target="#kritik_saran">
+                                    <i class="ph-chat-centered-dots"></i>
+                                </a>
+                            </li> --}}
+                        </ul>
+                        <div class="navbar-collapse flex-lg-1 order-2 order-lg-1 collapse" id="navbar_search">
+                            <div class="navbar-search flex-fill dropdown mt-2 mt-lg-0">
+                                <div class="position-static">
+                                </div>
+                            </div>
+                        </div>
+    
+                        <ul class="nav hstack gap-sm-1 flex-row justify-content-end order-1 order-lg-2">
+                            <li class="nav-item nav-item-dropdown-lg dropdown">
+                                <a href="#" class="navbar-nav-link align-items-center rounded-pill p-1" data-bs-toggle="dropdown">
+                                    <div class="status-indicator-container" style="pointer-events: auto;pointer-events: none;">
+                                        @if(auth()->user()->el_profile)
+                                             <img src="{{ auth()->user()->el_profile->profile }}" class="rounded-pill" style="weight: 42px;height: 42px;background-color: #fb8b3b;border: 1px solid black;">
+                                        @else
+                                            <img src="{{ url('assetImg/user.png')}}" class="rounded-pill" alt="" style="weight: 42px;height: 42px;">
+                                         @endif
+                                        <span class="status-indicator bg-success"></span>
+                                    </div>
+                                    <span class="d-none d-lg-inline-block mx-lg-2"><b>{{ auth()->user()->name }}</b><br>
+                                        <?php
+                                            $cek = 0;
+                                        ?>
+                                        {{-- @foreach(auth()->user()->arole_user_data as $data)
+                                            @if($cek>0)
+                                                <i>&</i>
+                                            @endif
+                                            <small><i>{{ $data->arole->name }}</i></small>
+                                            <?php
+                                                $cek++;
+                                            ?>
+                                        @endforeach --}}
+                                    </span>
+                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="#" class="dropdown-item">
+                                        <i class="ph-key me-2"></i>
+                                        Change Password & Email
+                                    </a>
+                                    <a href="route('logout')" class="dropdown-item" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                        <i class="ph-sign-out me-2"></i>
+                                        Logout
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /main navbar -->
+    
+    
+                <!-- Inner content -->
+                <div class="content-inner">
+    
+                    <div class="my-xs-5">
+                        <br>
+                    </div>
+    
+                    <!-- Content area -->
+                    <div class="content pt-0">
+                        @yield('content')
+                    </div>
+                </div>
+                <!-- /inner content -->
+    
+            </div>
+            <!-- /main content -->
+    
+        </div>
+        <!-- /page content -->
+        <!-- Warning theme -->
+        <div id="kritik_saran" class="offcanvas offcanvas-end m-3 shadow-lg" style="border-radius: 20px 20px 0px 20px;" tabindex="-1">
+            <div class="offcanvas-header bg-fabric text-white" style="border-radius: 20px 20px 0px 0px;">
+                <h5 class="offcanvas-title fw-semibold">Kritik & Saran</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+            </div>
+    
+            <div class="offcanvas-body p-0">
+                <h4 class="fw-light lh-base mb-0 p-3">
+                    test
+                </h4>
+            </div>
+    
+            <div class="d-flex bg-warning text-white py-2 px-3" style="border-radius: 0px 0px 0px 20px;">
+                <a href="#" class="btn btn-warning btn-icon flex-fill rounded-pill">
+                    <i class="ph-house"></i>
+                </a>
+                <a href="#" class="btn btn-warning btn-icon flex-fill rounded-pill">
+                    <i class="ph-chat-text"></i>
+                </a>
+                <a href="#" class="btn btn-warning btn-icon flex-fill rounded-pill">
+                    <i class="ph ph-article"></i>
+                </a>
+            </div>
+        </div>
+        <!-- /warning theme -->
+    @yield('modal')
+    @yield('js')
+    {{-- <script>
+        var current = 0;
+        $("#sidebarcontrol").click(function(){
+            if(current % 2 == 0){
+                var checkContents = setInterval(function(){
+                if($('.sidebar-main-unfold').length > 0){
+                    $("#factorycontrol").addClass('mt-2');
+                    $("#factorycontrol").removeClass('mb-3');
+                    $("#factorycontrol").removeClass('rotated');
+                    $("#factorycontrol").addClass('norotated');
+                    if(current>0){
+                        $("#factorycontrol").removeClass('mt-2');
+                    }
+                }else{
+                    $("#factorycontrol").addClass('rotated');
+                    $("#factorycontrol").addClass('norotated');
+                    if(current>1){
+                        $("#factorycontrol").removeClass('mb-3');
+                        $("#factorycontrol").removeClass('mt-2');
+                        if(current % 2 == 0){
+                            $("#factorycontrol").removeClass('rotated');
+                            $("#factorycontrol").addClass('norotated');
+                        }
+                    }else{
+                        $("#factorycontrol").addClass('mb-3');
+                        $("#factorycontrol").removeClass('mt-2');
+                    }
+                  }
+                },500);
+            }else{
+                $("#factorycontrol").removeClass('rotated');
+                $("#factorycontrol").addClass('norotated');
+                $("#factorycontrol").removeClass('mb-3');
+                $("#factorycontrol").removeClass('mt-2');
+            }
+            current++;
+        });
+    
+        $(document).ready(function() {
+    
+            loadnotif();
+    
+        });
+    
+        // // SOCKET.IO
+        socket.on('reloadAgentAddComment', () => {
+            console.log('Update Notif by Socket.io');
+            loadnotif();
+        });
+        socket.on('reloadOutStanding', () => {
+            console.log('Update Outstanding by Socket.io');
+            loadnotif();
+        });
+        // END SOCKET.IO
+    
+        function loadnotif(){
+            $.ajax({
+                type: 'get',
+                url :  "{{ route('getDataChat') }}",
+                success: function(response) {
+                    var datax = response.data;
+                    if(datax.status == 200)
+                    {
+                        $('#countchat').html(datax.count);
+                        $('#content_notif').html('');
+                        var uri = "{{Request::segment(1)}}"
+                        $.each(datax.chat, function(i){
+                            if(uri == 'my-ticket'){
+                                console.log('uri1:'+uri);
+                                $('#content_notif').append(`<a onclick="getDetailTicketData('my-ticket/getdetail-ticket/`+datax.chat[i].id+`'),updateReadComment('my-ticket/update-read-comment/`+datax.chat[i].id+`')" style="cursor: pointer;" class="dropdown-item align-items-start text-wrap py-2">
+                                    <div class="status-indicator-container me-3">
+                                        <img src="{{ url('assetImg/user.png')}}" class="w-40px h-39px rounded-pill" alt="">
+                                        <span class="status-indicator bg-success"></span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="fw-semibold">`+datax.chat[i].ticket+`</span>
+                                        <span class="text-muted float-end fs-sm">`+datax.chat[i].tc_created_at+`</span>
+                                        <div class="text-muted">`+datax.chat[i].u_name+`</div>
+                                        <div class="text-muted">`+datax.chat[i].tc_description+`</div>
+                                    </div>
+                                </a>`);
+                            }else{
+                                console.log('uri2:'+uri);
+                                $('#content_notif').append(`<a onclick="location.href='my-ticket#`+datax.chat[i].id+`'" style="cursor: pointer;" class="dropdown-item align-items-start text-wrap py-2">
+                                    <div class="status-indicator-container me-3">
+                                        <img src="{{ url('assetImg/user.png')}}" class="w-40px h-39px rounded-pill" alt="">
+                                        <span class="status-indicator bg-success"></span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="fw-semibold">`+datax.chat[i].ticket+`</span>
+                                        <span class="text-muted float-end fs-sm">`+datax.chat[i].tc_created_at+`</span>
+                                        <div class="text-muted">`+datax.chat[i].u_name+`</div>
+                                        <div class="text-muted">`+datax.chat[i].tc_description+`</div>
+                                    </div>
+                                </a>`);
+                            }
+                        });
+                        if(datax.count == 0){
+                            $('#content_notif').html('');
+                            $('#content_notif').append(`<div class="text-center mb-2">Tidak ada riwayat</div>`);
+                        }
+    
+                    }
+                    else
+                    {
+                        console.log('Something Wrong, please contact ICT!!');
+                    }
+                    $.unblockUI();
+                },
+                error: function(response) {
+                    var datax = response.data;
+                    alert(datax.status,datax.output);
+                    $.unblockUI();
+                }
+            });
+        }
+    </script> --}}
+    </body>
+</html>
