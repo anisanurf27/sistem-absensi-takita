@@ -2,34 +2,63 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Presensix - @yield('judulmenu')</title>
+        <link rel="shortcut icon" href="{{ url('assetImg/logo-judul.png') }}" type="image/x-icon">
 
         <!-- Scripts -->
-        {{-- @vite(['resources\sass\app.scss', 'resources\js\app.js']) --}}
+        {{-- @vite(['resources/assets/sass/app.scss', 'resources/assets/js/app.js'])  --}}
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	
         <!-- Global stylesheets -->
         <link href="{{ url('bs5eticket/template/assets/fonts/inter/inter.css')}}" rel="stylesheet" type="text/css">
         <link href="{{ url('bs5eticket/template/assets/icons/phosphor/styles.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ url('bs5eticket/template/assets/icons/fontawesome/styles.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{ url('bs5eticket/template/html/layout_2/full/assets/css/ltr/all.min.css')}}" id="stylesheet" rel="stylesheet" type="text/css">
-        <!-- /global stylesheets -->
-    
+        <!-- Global stylesheets -->
+
+        @yield('style')
+        {{-- OLD CSS --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/linkifyjs@4.1.1/dist/linkify.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/linkify-html@4.1.1/dist/linkify-html.min.js"></script>
+        <script type="text/javascript" src="{{url('assets/js/plugins/forms/selects/select2.min.js')}}"></script>
+        <link href="{{url('https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{url('https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css')}}" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="{{url('bs5/js/jqueryvalidate.js')}}"></script>
+        <script type="text/javascript" src="{{url('bs5/js/jqueryvalidateextend.js')}}"></script>
+        {{-- OLD CSS --}}
+        
         <!-- Core JS files -->
         <script src="{{ url('bs5eticket/template/assets/demo/demo_configurator.js')}}"></script>
-        <script src="{{ url('bs5eticket/template/assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
-        <!-- /core JS files -->
-    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <!-- Core JS files -->
+        
         <!-- Theme JS files -->
+        <script src="{{ url('bs5eticket/template/assets/js/vendor/forms/selects/bootstrap_multiselect.js')}}"></script>
+        <script src="{{ url('bs5eticket/template/assets/js/vendor/notifications/sweet_alert.min.js')}}"></script>
+        <script src="{{ url('bs5eticket/template/assets/demo/pages/extra_sweetalert.js')}}"></script>
+        <script src="{{ url('bs5eticket/template/assets/js/vendor/visualization/d3/d3.min.js')}}"></script>
+        <script src="{{ url('bs5eticket/template/assets/js/vendor/visualization/d3/d3_tooltip.js')}}"></script>
+        <script src="{{ url('bs5eticket/template/assets/js/vendor/visualization/echarts/echarts.min.js')}}"></script>
+        
         <script src="{{ url('bs5eticket/template/html/layout_2/full/assets/js/app.js')}}"></script>
-        <!-- /theme JS files -->
+        <script src="{{ url('bs5eticket/template/assets/demo/pages/dashboard.js')}}"></script>
+        <!-- Theme JS files -->
+
+        {{-- OLD JS --}}
+        <script type="text/javascript" src="{{url('assets/js/plugins/loaders/blockui.min.js')}}"></script>    
+        <script type="text/javascript" src="{{url('assets/js/plugins/forms/selects/select2.min.js')}}"></script>
+        <script type="text/javascript" src="{{url('assets/js/pages/form_select2.js')}}"></script>
+        <script type="text/javascript" src="{{url('assets/js/core/libraries/jquery_ui/interactions.min.js')}}"></script>
+        <script src="{{url('bs5eticket/template/assets/js/vendor/tables/datatables/datatables.min.js')}}"></script>
+        <script type="text/javascript" src="{{url('assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+        <script type="text/javascript" src="{{url('bs5/js/date.js')}}"></script>
+        <script type="text/javascript" src="{{url('bs5/js/htmlson.js')}}"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+        {{-- OLD JS --}}
 
         <style>
             .bg-fabric{
@@ -163,9 +192,7 @@
                 <div class="sidebar-section bg-black bg-opacity-10 border-bottom border-bottom-white border-opacity-10">
                     <div class="sidebar-logo d-flex justify-content-center align-items-center">
                         <a href="{{ route('dashboard') }}" class="d-inline-flex align-items-center py-1">
-                            <img src="{{ url('assetImg/ticket7.png') }}" height="45" alt="">
                             <img src="{{ url('assetImg/logo-apk2.png') }}" height="45" alt="" class="sidebar-resize-hide" style="margin-left: 0px !important">
-                            <!-- <img src="../../../assets/images/logo_text_light.svg" class="sidebar-resize-hide ms-3" height="14" alt=""> -->
                         </a>
     
                         <div class="sidebar-resize-hide ms-auto">
@@ -203,17 +230,6 @@
                     <!-- /main navigation -->
     
                 </div>
-                {{-- <div class="alert bg-secondary bg-opacity-20 sidebar-resize-hide rounded p-2 m-3">
-                    <a target="_blank" href="{{ url('assetImg/User Manual Ticketing System.pdf') }}" class="d-flex justify-content-between mt-1 " data-color-theme="dark">
-                        <span>User Manual</span>
-                        <i class="ph-arrow-circle-right ms-2"></i>
-                    </a>
-                </div> --}}
-                {{-- <div class="text-center">
-                    <small>© 2023 Ticketing System</small>
-                </div> --}}
-                <!-- /sidebar content -->
-    
             </div>
             <!-- /main sidebar -->
     
@@ -251,11 +267,6 @@
                                     </div>
                                 </div>
                             </li>
-                            {{-- <li class="nav-item nav-item-dropdown-lg dropdown ms-2">
-                                <a href="#" class="navbar-nav-link navbar-nav-link-icon rounded-pill border shake" data-bs-toggle="offcanvas" data-bs-target="#kritik_saran">
-                                    <i class="ph-chat-centered-dots"></i>
-                                </a>
-                            </li> --}}
                         </ul>
                         <div class="navbar-collapse flex-lg-1 order-2 order-lg-1 collapse" id="navbar_search">
                             <div class="navbar-search flex-fill dropdown mt-2 mt-lg-0">
@@ -275,19 +286,7 @@
                                          @endif
                                         <span class="status-indicator bg-success"></span>
                                     </div>
-                                    <span class="d-none d-lg-inline-block mx-lg-2"><b>{{ auth()->user()->name }}</b><br>
-                                        <?php
-                                            $cek = 0;
-                                        ?>
-                                        {{-- @foreach(auth()->user()->arole_user_data as $data)
-                                            @if($cek>0)
-                                                <i>&</i>
-                                            @endif
-                                            <small><i>{{ $data->arole->name }}</i></small>
-                                            <?php
-                                                $cek++;
-                                            ?>
-                                        @endforeach --}}
+                                    <span class="d-none d-lg-inline-block mx-lg-2"><b>{{ strtoupper(auth()->user()->name) }}</b><br>
                                     </span>
                                 </a>
     
@@ -325,12 +324,12 @@
                     </div>
                 </div>
                 <!-- /inner content -->
-    
             </div>
             <!-- /main content -->
     
         </div>
         <!-- /page content -->
+
         <!-- Warning theme -->
         <div id="kritik_saran" class="offcanvas offcanvas-end m-3 shadow-lg" style="border-radius: 20px 20px 0px 20px;" tabindex="-1">
             <div class="offcanvas-header bg-fabric text-white" style="border-radius: 20px 20px 0px 0px;">
@@ -357,124 +356,8 @@
             </div>
         </div>
         <!-- /warning theme -->
+
     @yield('modal')
     @yield('js')
-    {{-- <script>
-        var current = 0;
-        $("#sidebarcontrol").click(function(){
-            if(current % 2 == 0){
-                var checkContents = setInterval(function(){
-                if($('.sidebar-main-unfold').length > 0){
-                    $("#factorycontrol").addClass('mt-2');
-                    $("#factorycontrol").removeClass('mb-3');
-                    $("#factorycontrol").removeClass('rotated');
-                    $("#factorycontrol").addClass('norotated');
-                    if(current>0){
-                        $("#factorycontrol").removeClass('mt-2');
-                    }
-                }else{
-                    $("#factorycontrol").addClass('rotated');
-                    $("#factorycontrol").addClass('norotated');
-                    if(current>1){
-                        $("#factorycontrol").removeClass('mb-3');
-                        $("#factorycontrol").removeClass('mt-2');
-                        if(current % 2 == 0){
-                            $("#factorycontrol").removeClass('rotated');
-                            $("#factorycontrol").addClass('norotated');
-                        }
-                    }else{
-                        $("#factorycontrol").addClass('mb-3');
-                        $("#factorycontrol").removeClass('mt-2');
-                    }
-                  }
-                },500);
-            }else{
-                $("#factorycontrol").removeClass('rotated');
-                $("#factorycontrol").addClass('norotated');
-                $("#factorycontrol").removeClass('mb-3');
-                $("#factorycontrol").removeClass('mt-2');
-            }
-            current++;
-        });
-    
-        $(document).ready(function() {
-    
-            loadnotif();
-    
-        });
-    
-        // // SOCKET.IO
-        socket.on('reloadAgentAddComment', () => {
-            console.log('Update Notif by Socket.io');
-            loadnotif();
-        });
-        socket.on('reloadOutStanding', () => {
-            console.log('Update Outstanding by Socket.io');
-            loadnotif();
-        });
-        // END SOCKET.IO
-    
-        function loadnotif(){
-            $.ajax({
-                type: 'get',
-                url :  "{{ route('getDataChat') }}",
-                success: function(response) {
-                    var datax = response.data;
-                    if(datax.status == 200)
-                    {
-                        $('#countchat').html(datax.count);
-                        $('#content_notif').html('');
-                        var uri = "{{Request::segment(1)}}"
-                        $.each(datax.chat, function(i){
-                            if(uri == 'my-ticket'){
-                                console.log('uri1:'+uri);
-                                $('#content_notif').append(`<a onclick="getDetailTicketData('my-ticket/getdetail-ticket/`+datax.chat[i].id+`'),updateReadComment('my-ticket/update-read-comment/`+datax.chat[i].id+`')" style="cursor: pointer;" class="dropdown-item align-items-start text-wrap py-2">
-                                    <div class="status-indicator-container me-3">
-                                        <img src="{{ url('assetImg/user.png')}}" class="w-40px h-39px rounded-pill" alt="">
-                                        <span class="status-indicator bg-success"></span>
-                                    </div>
-                                    <div class="flex-1">
-                                        <span class="fw-semibold">`+datax.chat[i].ticket+`</span>
-                                        <span class="text-muted float-end fs-sm">`+datax.chat[i].tc_created_at+`</span>
-                                        <div class="text-muted">`+datax.chat[i].u_name+`</div>
-                                        <div class="text-muted">`+datax.chat[i].tc_description+`</div>
-                                    </div>
-                                </a>`);
-                            }else{
-                                console.log('uri2:'+uri);
-                                $('#content_notif').append(`<a onclick="location.href='my-ticket#`+datax.chat[i].id+`'" style="cursor: pointer;" class="dropdown-item align-items-start text-wrap py-2">
-                                    <div class="status-indicator-container me-3">
-                                        <img src="{{ url('assetImg/user.png')}}" class="w-40px h-39px rounded-pill" alt="">
-                                        <span class="status-indicator bg-success"></span>
-                                    </div>
-                                    <div class="flex-1">
-                                        <span class="fw-semibold">`+datax.chat[i].ticket+`</span>
-                                        <span class="text-muted float-end fs-sm">`+datax.chat[i].tc_created_at+`</span>
-                                        <div class="text-muted">`+datax.chat[i].u_name+`</div>
-                                        <div class="text-muted">`+datax.chat[i].tc_description+`</div>
-                                    </div>
-                                </a>`);
-                            }
-                        });
-                        if(datax.count == 0){
-                            $('#content_notif').html('');
-                            $('#content_notif').append(`<div class="text-center mb-2">Tidak ada riwayat</div>`);
-                        }
-    
-                    }
-                    else
-                    {
-                        console.log('Something Wrong, please contact ICT!!');
-                    }
-                    $.unblockUI();
-                },
-                error: function(response) {
-                    var datax = response.data;
-                    alert(datax.status,datax.output);
-                    $.unblockUI();
-                }
-            });
-        }
-    </script> --}}
     </body>
 </html>

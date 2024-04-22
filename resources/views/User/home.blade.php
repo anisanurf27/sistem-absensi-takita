@@ -27,6 +27,7 @@
 </div>
 {{-- Start Modal Email Check --}}
 @if(!auth()->user()->email)
+
 <div id="modal_add_email" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -56,11 +57,13 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     $(window).on('load', function () {
         $('#modal_add_email').modal('show');
     });
 </script>
+
 @endif
 {{-- End Modal Email Check --}}
 @endsection
@@ -122,6 +125,7 @@
         });
     });
 </script>
+
 <script>
     class TextScramble {
   constructor(el) {
