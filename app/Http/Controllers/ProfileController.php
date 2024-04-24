@@ -14,11 +14,37 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function changeProfile(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        return view('user.main.changeProfile');
+    }
+
+    public function updateProfile(Request $request){
+        try {
+            if($request->avatarData){
+                $update = Profiles::updateOrCreate(
+                    ["user_id" => auth()->user()->id],
+                    ["profile" => $request->avatarData]);
+    
+                $data_response = [
+                    'status' => 200,
+                    'output' => 'Avatar changed successfully!'
+                ];
+            }else{
+                $data_response = [
+                'status' => 404,
+                'output' => 'Something Wrong!'
+                ];
+            }
+        }catch (\Throwable $th) {
+          DB::rollBack();
+          $message = $th->getMessage();
+          $data_response = [
+              'status' => 500,
+              'output' => $message
+          ];
+        }
+        return response()->json(['data'=>$data_response]);
     }
 
     /**

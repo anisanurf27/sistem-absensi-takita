@@ -96,14 +96,14 @@
             .bg-hover:hover{
                 background-color: rgba(223, 193, 58, 0.623);
             }
-              .pall{
+            .pall{
                 padding: 10px !important;
-              }
+            }
             .bg-shadow-sm{
                 box-shadow: 4px 4px 4px -2px rgba(0,0,0,0.44);
                 -webkit-box-shadow: 4px 4px 4px -2px rgba(0,0,0,0.44);
                 -moz-box-shadow: 4px 4px 4px -2px rgba(0,0,0,0.44);
-              }
+            }
         </style>
         
         <script type="text/javascript">
@@ -180,8 +180,8 @@
             }
         </script>
     </head>
-    <body>
 
+    <body>
         <!-- Page content -->
         <div class="page-content">
     
@@ -191,15 +191,17 @@
                 <!-- Sidebar header -->
                 <div class="sidebar-section bg-black bg-opacity-10 border-bottom border-bottom-white border-opacity-10">
                     <div class="sidebar-logo d-flex justify-content-center align-items-center">
-                        <a href="{{ route('dashboard') }}" class="d-inline-flex align-items-center py-1">
-                            <img src="{{ url('assetImg/logo-apk2.png') }}" height="45" alt="" class="sidebar-resize-hide" style="margin-left: 0px !important">
+                        <a href="{{ route('home') }}" class="d-inline-flex align-items-center py-1">
+                            <img src="{{ url('assetImg/logo-apk3.png') }}" height="45" alt="">
+                            <img src="{{ url('assetImg/logo-apk2.png') }}" height="45" alt="" class="sidebar-resize-hide" style="margin-left: -39px !important">
+                            <!-- <img src="../../../assets/images/logo_text_light.svg" class="sidebar-resize-hide ms-3" height="14" alt=""> -->
                         </a>
-    
+
                         <div class="sidebar-resize-hide ms-auto">
                             <button id="sidebarcontrol" type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
                                 <i class="ph-arrows-left-right"></i>
                             </button>
-    
+
                             <button type="button" class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-lg-none">
                                 <i class="ph-x"></i>
                             </button>
@@ -215,7 +217,9 @@
                     <!-- Customers -->
                     <div class="p-2">
                         <div class="rounded bg-fabric text-white text-center py-2">
-                            <span class="h4 text-nowrap"><b> SMANSIX </b></span>
+                            <div id="school_name">
+                                <span class="h4 text-nowrap"><b> SMANSIX </b></span>
+                            </div>
                         </div>
                     </div>
                     <!-- /customers -->
@@ -245,8 +249,9 @@
                                 <i class="ph-list"></i>
                             </button>
                         </div>
-    
-                        <ul class="nav flex-row">
+
+                        {{-- Lonceng Notif --}}
+                        {{-- <ul class="nav flex-row">
                             <li class="nav-item d-lg-none">
                                 <a href="#navbar_search" class="navbar-nav-link navbar-nav-link-icon rounded-pill" data-bs-toggle="collapse">
                                     <i class="ph-magnifying-glass"></i>
@@ -267,7 +272,9 @@
                                     </div>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> --}}
+                        {{-- Lonceng Notif --}}
+
                         <div class="navbar-collapse flex-lg-1 order-2 order-lg-1 collapse" id="navbar_search">
                             <div class="navbar-search flex-fill dropdown mt-2 mt-lg-0">
                                 <div class="position-static">
@@ -291,7 +298,7 @@
                                 </a>
     
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="#" class="dropdown-item">
+                                    <a href="{{ route('changeProfile') }}" class="dropdown-item">
                                         <i class="ph-key me-2"></i>
                                         Change Password & Email
                                     </a>
@@ -330,34 +337,46 @@
         </div>
         <!-- /page content -->
 
-        <!-- Warning theme -->
-        <div id="kritik_saran" class="offcanvas offcanvas-end m-3 shadow-lg" style="border-radius: 20px 20px 0px 20px;" tabindex="-1">
-            <div class="offcanvas-header bg-fabric text-white" style="border-radius: 20px 20px 0px 0px;">
-                <h5 class="offcanvas-title fw-semibold">Kritik & Saran</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-            </div>
-    
-            <div class="offcanvas-body p-0">
-                <h4 class="fw-light lh-base mb-0 p-3">
-                    test
-                </h4>
-            </div>
-    
-            <div class="d-flex bg-warning text-white py-2 px-3" style="border-radius: 0px 0px 0px 20px;">
-                <a href="#" class="btn btn-warning btn-icon flex-fill rounded-pill">
-                    <i class="ph-house"></i>
-                </a>
-                <a href="#" class="btn btn-warning btn-icon flex-fill rounded-pill">
-                    <i class="ph-chat-text"></i>
-                </a>
-                <a href="#" class="btn btn-warning btn-icon flex-fill rounded-pill">
-                    <i class="ph ph-article"></i>
-                </a>
-            </div>
-        </div>
-        <!-- /warning theme -->
-
     @yield('modal')
     @yield('js')
+
+    <script>
+        var current = 0;
+        $("#sidebarcontrol").click(function(){
+            if(current % 2 == 0){
+                var checkContents = setInterval(function(){
+                if($('.sidebar-main-unfold').length > 0){
+                    $("#school_name").addClass('mt-2');
+                    $("#school_name").removeClass('mb-3');
+                    $("#school_name").removeClass('rotated');
+                    $("#school_name").addClass('norotated');
+                    if(current>0){
+                        $("#school_name").removeClass('mt-2');
+                    }
+                }else{
+                    $("#school_name").addClass('rotated');
+                    $("#school_name").addClass('norotated');
+                    if(current>1){
+                        $("#school_name").removeClass('mb-3');
+                        $("#school_name").removeClass('mt-2');
+                        if(current % 2 == 0){
+                            $("#school_name").removeClass('rotated');
+                            $("#school_name").addClass('norotated');
+                        }
+                    }else{
+                        $("#school_name").addClass('mb-3');
+                        $("#school_name").removeClass('mt-2');
+                    }
+                  }
+                },500);
+            }else{
+                $("#school_name").removeClass('rotated');
+                $("#school_name").addClass('norotated');
+                $("#school_name").removeClass('mb-3');
+                $("#school_name").removeClass('mt-2');
+            }
+            current++;
+        });
+    </script>
     </body>
 </html>
