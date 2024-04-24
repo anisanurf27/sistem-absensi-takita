@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,18 +19,19 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/home', function () {
-    return view('user.main.home');
-})->middleware(['auth', 'verified'])->name('home');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/home', function () {
+//     return view('user.main.home');
+// })->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/home', [MainController::class, 'home'])->name('home');
     
     Route::get('/profile', [ProfileController::class, 'changeProfile'])->name('changeProfile');
     Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('updateProfile');
+
+    // Start Input Email
+    Route::post('/input-email', [MainController::class, 'inputEmail'])->name('inputEmail');
+    // End Input Email
 
 });
 
