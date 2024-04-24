@@ -38,8 +38,8 @@
             <form action="#" id="form-add-email" method="get">
                 <div class="modal-body">
                     <div class="text-center">
-                        <label for="" class="mb-2 label label-block label-warning">Harap masukkan email Internal Anda!</label><br>
-                        <label for="" style="background-color: #dbc50062;" class="alert p-0"><small class="text-dark"><i class="ph-info"></i> Jika tidak memiliki email internal, silahkan isi dengan Email (nik@bbi-apparel.com)</small></label>
+                        <label for="" class="mb-2 label label-block label-warning">Harap masukkan email aktif Anda!</label><br>
+                        <label for="" style="background-color: #dbc50062;" class="alert p-0"><small class="text-dark"><i class="ph-info"></i> Contoh admin@gmail.com</small></label>
                     </div>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
@@ -83,6 +83,7 @@
         });
         $.ajax({
             type: 'post',
+            url: "{{ route('inputEmail') }}",
             data: new FormData(this),
             dataType: 'JSON',
             contentType: false,

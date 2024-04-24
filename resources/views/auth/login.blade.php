@@ -129,7 +129,7 @@
 				<div class="content d-flex justify-content-center align-items-center">
 
 					<!-- Login form -->
-					<form class="login-form" action="{{route('login')}}" method="POST">
+					<form class="login-form" action="{{route('auth.login')}}" method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="card mb-0 shadow" style="border-radius: 15px;">
 							<div class="card-body">
@@ -141,10 +141,22 @@
 									<span class="d-block text-muted">Enter your identity below</span>
 								</div>
 
+								@if ($errors->has('account'))
+                                <div class="alert alert-danger alert-dismissible fade show">
+                                    <table>
+                                        <tr>
+                                            <td><i class="ph-x-circle me-2"></i></td>
+                                            <td>{{ $errors->first('account') }}</td>
+                                        </tr>
+                                    </table>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                                @endif
+
 								<div class="mb-3">
 									<label class="form-label">NIP / NISN</label>
 									<div class="form-control-feedback form-control-feedback-start">
-										<input type="text" class="form-control" placeholder="NIP / NISN" type="email" name="email" required>
+										<input type="text" class="form-control" placeholder="NIP / NISN" type="text" name="credential_number" required>
 										<div class="form-control-feedback-icon">
 											<i class="ph-user-circle text-muted"></i>
 										</div>
@@ -178,7 +190,8 @@
 		</div>
 	</div>
 </body>
-{{-- <script>
+
+<script>
 	var passInput = $("#password");
         $('#password').keyup(function(){            
             if($('#password').val() != ''){
@@ -192,27 +205,26 @@
             }
         });
         
-        function showPassword(){              
-            if(passInput.attr('type')==='password')
-                {
-                passInput.attr('type','text');
-            }else{
-                passInput.attr('type','password');
-            }
-        }
+	function showPassword(){              
+		if(passInput.attr('type')==='password')
+			{
+			passInput.attr('type','text');
+		}else{
+			passInput.attr('type','password');
+		}
+	}
 
-		$(document).ready(function(){
-    $(".position-absolute").hover(
-        function() {
-            $(this).find('.dashboard-text').stop().fadeIn('slow').toggleClass('d-none');
-        }, 
-        function() {
-            $(this).find('.dashboard-text').stop().fadeOut('slow', function() {
-                $(this).toggleClass('d-none');
-            });
-        }
-    );
-});
-
-</script> --}}
+	$(document).ready(function(){
+		$(".position-absolute").hover(
+			function() {
+				$(this).find('.dashboard-text').stop().fadeIn('slow').toggleClass('d-none');
+			}, 
+			function() {
+				$(this).find('.dashboard-text').stop().fadeOut('slow', function() {
+					$(this).toggleClass('d-none');
+				});
+			}
+		);
+	});
+</script>
 </html>
