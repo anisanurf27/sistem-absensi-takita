@@ -196,7 +196,7 @@ const phrases = [
   "Surat Izin",
   "Dashboard Pantau",
   "Report Kehadiran",
-  "Digitalisasi Absensi",
+  "Digitalisasi Presensi",
 ];
 
 const el = document.querySelector(".randomteks");
