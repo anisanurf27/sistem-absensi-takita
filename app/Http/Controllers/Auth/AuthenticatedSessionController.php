@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\AllData;
@@ -95,40 +95,71 @@ class AuthenticatedSessionController extends Controller
                             break;
                     }
 
-                    if ($newData) {
-                        $position = strtolower($newData->position);
+                    // if ($newData) {
+                    //     $position = strtolower($newData->position);
                     
-                        if ($position == 'siswa') {
-                            $role = Role::where('name', 'siswa')->where('guard_name', '')->first();
-                            if ($role) {
-                                $newData->assignRole($role);
-                            } 
-                        } elseif ($position == 'guru') {
-                            $role = Role::where('name', 'guru')->where('guard_name', '')->first();
-                            if ($role) {
-                                $newData->assignRole($role);
-                            } 
-                        } elseif ($position == 'admin') {
-                            $role = Role::where('name', 'admin')->where('guard_name', '')->first();
-                            if ($role) {
-                                $newData->assignRole($role);
-                            } 
-                        } else {
-                            $role_id = 1;
+                    //     if ($position == 'siswa') {
+                    //         DB::table('model_has_roles')->insert{
+                    //             'role_id' => '1',
+                    //             'model/type' => 'App\Models\User',
+                    //             'model_id' => ''
+                    //         }
+                    //         $role = Role::where('name', 'siswa')->where('guard_name', '')->first();
+                    //         if ($role) {
+                    //             $newData->assignRole($role);
+                    //         } 
+                    //     } elseif ($position == 'guru') {
+                    //         $role = Role::where('name', 'guru')->where('guard_name', '')->first();
+                    //         if ($role) {
+                    //             $newData->assignRole($role);
+                    //         } 
+                    //     } elseif ($position == 'admin') {
+                    //         $role = Role::where('name', 'admin')->where('guard_name', '')->first();
+                    //         if ($role) {
+                    //             $newData->assignRole($role);
+                    //         } 
+                    //     } else {
+                    //         $role = Role::where('name', 'siswa')->where('guard_name', '')->first();
+                    //         $newData->assignRole($role);
+                    //     }
+                    // } 
+
+                    $position = strtolower($newData->position);
+                    DB::transaction(function () use ($request, $newData, $kelas_id, $position) {
+                        $storeUser = User::insert([
+                            'credential_number' => $request->credential_number,
+                            'password' => Hash::make($request->password),
+                            'name' => strtoupper($newData->name),
+                            'kelas_id' => $kelas_id,
+                            'position' => $position,
+                            'created_at'=> carbon::now(),
+                            'updated_at'=> carbon::now(),
+                        ]);
+                    
+                        if ($storeUser) {
+                            $role_id = null;
+                            switch ($position) {
+                                case 'siswa':
+                                    $role_id = 1;
+                                    break;
+                                case 'guru':
+                                    $role_id = 2;
+                                    break;
+                                case 'admin':
+                                    $role_id = 3;
+                                    break;
+                                default:
+                                    $role_id = 1;
+                            }
+                            
+                            $dataUser = User::where('credential_number',$newData->credential_number)->first();
+                            DB::table('model_has_roles')->insert([
+                                'role_id' => $role_id,
+                                'model_type' => 'App\Models\User',
+                                'model_id' => $dataUser->id,
+                            ]);
                         }
-                    } 
-
-                    $storeUser = User::insert([
-                        'credential_number' => $request->credential_number,
-                        'password' => Hash::make($request->password),
-                        'name' => strtoupper($newData->name),
-                        'kelas_id' => $kelas_id,
-                        'position' => $position,
-                        'created_at'=> carbon::now(),
-                        'updated_at'=> carbon::now(),
-                    ]);
-
-                    $dataUser = User::where('credential_number',$newData->credential_number)->first();
+                    });
 
                     if (auth()->attempt(['credential_number' => $request->credential_number, 'password' => $request->password]))
                     {
