@@ -342,41 +342,30 @@
 
     <script>
         var current = 0;
+        var checkContents;
+
         $("#sidebarcontrol").click(function(){
+            clearInterval(checkContents);
+
             if(current % 2 == 0){
-                var checkContents = setInterval(function(){
-                if($('.sidebar-main-unfold').length > 0){
-                    $("#school_name").addClass('mt-2');
-                    $("#school_name").removeClass('mb-3');
-                    $("#school_name").removeClass('rotated');
-                    $("#school_name").addClass('norotated');
-                    if(current>0){
-                        $("#school_name").removeClass('mt-2');
-                    }
-                }else{
-                    $("#school_name").addClass('rotated');
-                    $("#school_name").addClass('norotated');
-                    if(current>1){
-                        $("#school_name").removeClass('mb-3');
-                        $("#school_name").removeClass('mt-2');
-                        if(current % 2 == 0){
-                            $("#school_name").removeClass('rotated');
-                            $("#school_name").addClass('norotated');
+                $("#school_name").removeClass('norotated').addClass('rotated mb-5');
+                checkContents = setInterval(function(){
+                    if($('.sidebar-main-unfold').length > 0){
+                        $("#school_name").removeClass('mb-5 rotated').addClass('norotated mt-2');
+                        if(current > 0){
+                            $("#school_name").removeClass('mt-2');
                         }
-                    }else{
-                        $("#school_name").addClass('mb-3');
-                        $("#school_name").removeClass('mt-2');
+                    } else {
+                        $("#school_name").removeClass('mt-2').addClass('mb-5 rotated');
                     }
-                  }
-                },500);
-            }else{
-                $("#school_name").removeClass('rotated');
-                $("#school_name").addClass('norotated');
-                $("#school_name").removeClass('mb-3');
-                $("#school_name").removeClass('mt-2');
+                }, 500);
+            } else {
+                $("#school_name").removeClass('rotated mb-5').addClass('norotated');
             }
+
             current++;
         });
     </script>
+    
     </body>
 </html>

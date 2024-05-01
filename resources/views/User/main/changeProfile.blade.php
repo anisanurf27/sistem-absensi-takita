@@ -84,10 +84,10 @@
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group">
-                                    <label>NIK:</label>
+                                    <label>NISN/NIP:</label>
                                     <input type="text" class="form-control"
                                         style="font-weight: bold; background-color:rgb(238, 238, 238);"
-                                        value="{{ auth()->user()->nik }}" readonly>
+                                        value="{{ auth()->user()->credential_number }}" readonly>
                                 </div>
                             </div>
                         </div>

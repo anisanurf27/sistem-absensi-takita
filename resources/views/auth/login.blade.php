@@ -177,7 +177,7 @@
 								</div>
 
 								<div class="mb-1">
-									<button type="submit" class="btn btn-primary fw-bold w-100">LOGIN</button>
+									<button type="submit" class="btn btn-warning fw-bold w-100">LOGIN</button>
 								</div>
 								<div class="text-dark mt-2 text-center">
 									<span><small><i class="ph-book text-dark"></i></small> User Manual <a target="_blank" href="{{ url('assetImg/User Manual Ticketing System.pdf') }}">klik disini</a></span>
