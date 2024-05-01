@@ -19,10 +19,6 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// Route::get('/home', function () {
-//     return view('user.main.home');
-// })->middleware(['auth', 'verified'])->name('home');
-
 Route::middleware('auth')->group(function () {
     Route::get('/home', [MainController::class, 'home'])->name('home');
     
