@@ -25,6 +25,7 @@
         </div>
     </div>
 </div>
+
 {{-- Start Modal Email Check --}}
 @if(!auth()->user()->email)
 

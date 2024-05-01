@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\MainController;
+use App\Http\Controllers\User\DashboardController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,8 @@ Route::middleware('auth')->group(function () {
     // Start Input Email
     Route::post('/input-email', [MainController::class, 'inputEmail'])->name('inputEmail');
     // End Input Email
+
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 });
 

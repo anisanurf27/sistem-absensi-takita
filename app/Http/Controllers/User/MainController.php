@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 
 class MainController extends Controller

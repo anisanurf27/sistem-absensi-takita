@@ -293,8 +293,19 @@
                                          @endif
                                         <span class="status-indicator bg-success"></span>
                                     </div>
-                                    <span class="d-none d-lg-inline-block mx-lg-2"><b>{{ strtoupper(auth()->user()->name) }}</b><br>
-                                    </span>
+                                    @if(auth()->check())
+                                        <span class="d-none d-lg-inline-block mx-lg-2">
+                                            <b>{{ strtoupper(auth()->user()->name) }}</b><br>
+                                            <?php $cek = 0; ?>
+                                            @foreach(auth()->user()->roles as $data)
+                                                @if($cek > 0)
+                                                    <i>&</i>
+                                                @endif
+                                                <small><i>{{ ucwords($data->name) }}</i></small>
+                                                <?php $cek++; ?>
+                                            @endforeach
+                                        </span>
+                                    @endif
                                 </a>
     
                                 <div class="dropdown-menu dropdown-menu-end">
