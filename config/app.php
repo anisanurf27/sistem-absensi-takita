@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Add Spatie Laravel
         Spatie\Permission\PermissionServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ])->toArray(),
 
     /*
