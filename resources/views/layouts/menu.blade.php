@@ -9,7 +9,7 @@
 
 @can('add-permission')
 <li class="nav-item">
-    <a href="{{ route('home') }}" class="nav-link @yield('home')">
+    <a href="{{ route('input_izin') }}" class="nav-link @yield('input_izin')">
         <i class="ph-download-simple"></i>
         <span>
             Input Perizinan
