@@ -57,7 +57,6 @@
     <i class="ph-dots-three sidebar-resize-show"></i>
 </li>
 <li class="nav-item">
-<<<<<<< HEAD
     <a href="{{ route('enroll_device') }}" class="nav-link @yield('enroll_device')">
         <i class="ph-desktop-tower"></i>
         <span>
@@ -66,8 +65,6 @@
     </a>
 </li>
 <li class="nav-item">
-=======
->>>>>>> f2a1d5f3a966d6a30e8b3a846392856e945c1873
     <a href="{{ route('enroll_user') }}" class="nav-link @yield('enroll_user')">
         <i class="ph-identification-card"></i>
         <span>
