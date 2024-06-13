@@ -16,6 +16,15 @@
         </span>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('monitoring_presensi_diri') }}" class="nav-link @yield('monitoring_diri')">
+        <i class="ph-calendar"></i>
+        <span>
+            Monitoring Presensi
+        </span>
+    </a>
+</li>
 @endcan
 
 @can('read-presensi')
@@ -42,11 +51,26 @@
 
 
 {{-- Menu Super Admin --}}
-
 @can('read-user')
 <li class="nav-item-header">
     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">MASTER USER</div>
     <i class="ph-dots-three sidebar-resize-show"></i>
+</li>
+<li class="nav-item">
+    <a href="{{ route('enroll_device') }}" class="nav-link @yield('enroll_device')">
+        <i class="ph-desktop-tower"></i>
+        <span>
+            Enroll Device
+        </span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('enroll_user') }}" class="nav-link @yield('enroll_user')">
+        <i class="ph-identification-card"></i>
+        <span>
+            Enroll New User
+        </span>
+    </a>
 </li>
 <li class="nav-item">
     <a href="{{ route('home') }}" class="nav-link @yield('home')">

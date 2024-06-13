@@ -95,35 +95,6 @@ class AuthenticatedSessionController extends Controller
                             break;
                     }
 
-                    // if ($newData) {
-                    //     $position = strtolower($newData->position);
-                    
-                    //     if ($position == 'siswa') {
-                    //         DB::table('model_has_roles')->insert{
-                    //             'role_id' => '1',
-                    //             'model/type' => 'App\Models\User',
-                    //             'model_id' => ''
-                    //         }
-                    //         $role = Role::where('name', 'siswa')->where('guard_name', '')->first();
-                    //         if ($role) {
-                    //             $newData->assignRole($role);
-                    //         } 
-                    //     } elseif ($position == 'guru') {
-                    //         $role = Role::where('name', 'guru')->where('guard_name', '')->first();
-                    //         if ($role) {
-                    //             $newData->assignRole($role);
-                    //         } 
-                    //     } elseif ($position == 'admin') {
-                    //         $role = Role::where('name', 'admin')->where('guard_name', '')->first();
-                    //         if ($role) {
-                    //             $newData->assignRole($role);
-                    //         } 
-                    //     } else {
-                    //         $role = Role::where('name', 'siswa')->where('guard_name', '')->first();
-                    //         $newData->assignRole($role);
-                    //     }
-                    // } 
-
                     $position = strtolower($newData->position);
                     DB::transaction(function () use ($request, $newData, $kelas_id, $position) {
                         $storeUser = User::insert([
@@ -132,6 +103,11 @@ class AuthenticatedSessionController extends Controller
                             'name' => strtoupper($newData->name),
                             'kelas_id' => $kelas_id,
                             'position' => $position,
+                            'fingerprint_id'=> $newData->fingerprint_id,
+                            'add_fingerid'=>$newData->add_fingerid,
+                            'no_telp'=>$newData->no_telp,
+                            'nama_ortu_siswa'=>$newData->nama_ortu_siswa,
+                            'no_telp_ortu'=>$newData->no_telp_ortu,
                             'created_at'=> carbon::now(),
                             'updated_at'=> carbon::now(),
                         ]);

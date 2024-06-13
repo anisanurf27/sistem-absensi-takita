@@ -60,6 +60,25 @@
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
         {{-- OLD JS --}}
 
+        {{-- JS Input Fingger --}}
+        {{-- <script type="text/javascript" src="{{url('assets/js/fingger/bootboox.all.js')}}"></script> 
+        <script type="text/javascript" src="{{url('assets/js/fingger/bootboox.all.min.js')}}"></script> 
+        <script type="text/javascript" src="{{url('assets/js/fingger/bootboox.js')}}"></script> 
+        <script type="text/javascript" src="{{url('assets/js/fingger/bootboox.locales.js')}}"></script> 
+        <script type="text/javascript" src="{{url('assets/js/fingger/bootboox.locales.min.js')}}"></script> 
+        <script type="text/javascript" src="{{url('assets/js/fingger/bootboox.min.js')}}"></script> 
+        <script type="text/javascript" src="{{url('assets/js/fingger/dev_config.js')}}"></script> 
+        <script type="text/javascript" src="{{url('assets/js/fingger/manage_user.js')}}"></script> 
+        <script type="text/javascript" src="{{url('assets/js/fingger/user_log.js')}}"></script>  --}}
+        {{-- JS Input Fingger --}}
+
+        {{-- CSS Input Finger --}}
+        {{-- <link href="{{ url('assets/css/fingger/device.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ url('assets/css/fingger/manageusers.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ url('assets/css/fingger/User.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{ url('assets/css/fingger/userlog.css')}}" rel="stylesheet" type="text/css"> --}}
+        {{-- CSS Input Finger --}}
+
         <style>
             .bg-fabric{
                 background-image: url('{{ url("assetImg/fabric.webp")}}');
