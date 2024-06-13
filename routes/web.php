@@ -37,7 +37,6 @@ Route::middleware('auth')->group(function () {
     // End Input Email
 
     // Start Super Admin
-<<<<<<< HEAD
     Route::prefix('/md-enroll-usr')->middleware(['role:admin'])->group(function(){ 
         Route::get('', [EnrollUserController::class, 'enroll_user'])->name('enroll_user');
         Route::get('/get-data-enroll', [EnrollUserController::class, 'getDataEnroll'])->name('getDataEnroll');
@@ -57,11 +56,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete-device/{id}', [EnrollUserController::class, 'deleteDevice'])->name('deleteDevice');
         Route::post('/store-device', [EnrollUserController::class, 'storeDevice'])->name('storeDevice');
         Route::post('/store-edit-device', [EnrollUserController::class, 'storeEditDevice'])->name('storeEditDevice');
-=======
-    Route::prefix('/enroll-user')->middleware(['role:admin'])->group(function(){ 
-        Route::get('', [EnrollUserController::class, 'enroll_user'])->name('enroll_user');
-        Route::get('/get-data-enroll', [EnrollUserController::class, 'getDataEnroll'])->name('getDataEnroll');
->>>>>>> f2a1d5f3a966d6a30e8b3a846392856e945c1873
     });
     // End Super Admin
 

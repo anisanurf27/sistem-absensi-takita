@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
 use App\Models\AllData;
 use App\Models\Device;
 use App\Models\MasterKelas;
@@ -352,17 +351,4 @@ class EnrollUserController extends Controller
     
         return response()->json(['data' => $data_response]);
     }
-    
-=======
-
-class EnrollUserController extends Controller
-{
-    public function enroll_user() {
-        return view('user.enroll_user.index');
-    }
-
-    public function getDataEnroll(Request $request) {
-        
-    }
->>>>>>> f2a1d5f3a966d6a30e8b3a846392856e945c1873
 }
