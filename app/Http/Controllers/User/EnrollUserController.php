@@ -351,5 +351,4 @@ class EnrollUserController extends Controller
     
         return response()->json(['data' => $data_response]);
     }
-    
 }
